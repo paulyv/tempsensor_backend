@@ -1,0 +1,6 @@
+flask
+flask_cors
+multiprocessing
+adafruit_dht
+datetime
+json
