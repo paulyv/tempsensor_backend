@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 
 dhtSensor = adafruit_dht.DHT22(board.D4)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../build', static_url_path='/')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -58,7 +58,8 @@ def sensor():
 
 @app.route("/")
 def hello():
-    return render_template('index.html')
+    app.send_static_file('index.html')
+
 
 @app.route('/api/sensors/house/current_data')
 @cross_origin()
