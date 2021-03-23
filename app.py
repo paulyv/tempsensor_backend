@@ -5,12 +5,12 @@ from multiprocessing import Value, Lock
 import json
 import datetime
 import adafruit_dht
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from flask_cors import CORS, cross_origin
 
 dhtSensor = adafruit_dht.DHT22(board.D4)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="build/static", template_folder="build")
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -56,9 +56,9 @@ def sensor():
                 print("Could not get the readings")
         return humidity, temperature
 
-@app.route('/')
-def index():
-        return "Hello Temperature Station"
+@app.route("/")
+def hello():
+    return render_template('index.html')
 
 @app.route('/api/sensors/house/current_data')
 @cross_origin()
