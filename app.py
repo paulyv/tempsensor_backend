@@ -91,4 +91,4 @@ if __name__ == '__main__':
     file_in_use = Value('i', 0)
     p = multiprocessing.Process(target=worker, args=(file_in_use, ))
     p.start()
-    app.run(port=3001, host='0.0.0.0')
+    app.run(port=3000, host='0.0.0.0')
