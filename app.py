@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 
 dhtSensor = adafruit_dht.DHT22(board.D4)
 
-app = Flask(__name__, static_folder='./static/static/', template_folder='./static', static_url_path='/static')
+app = Flask(__name__, static_folder='./build/static/', template_folder='./build', static_url_path='/static')
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
@@ -91,4 +91,4 @@ if __name__ == '__main__':
     file_in_use = Value('i', 0)
     p = multiprocessing.Process(target=worker, args=(file_in_use, ))
     p.start()
-    app.run(port=3000, host='0.0.0.0')
+    app.run(port=3001, host='0.0.0.0')
