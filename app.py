@@ -20,17 +20,19 @@ def worker(file_in_use):
     data['temperatures'] = []
     data['humidities'] = []
     while True:
+        print("data length: " + len(data))
         humidity, temperature = sensor()
-        if humidity == 0 or humidity == 'null' or temperature == 0 or temperature == 'null':
+        if humidity == None or humidity == 'null' or temperature == None or temperature == 'null':
                 time.sleep(0.5)
                 humidity, temperature = sensor()
 
         timestamp = datetime.datetime.now().isoformat()
 
-        if temperature == 'null' or humidity == 'null':
+        if temperature == 'null' or humidity == 'null' or temperature == None:
             continue
 
         print("hum: " + str(humidity) + " temp: " + str(temperature))
+
         data['temperatures'].append({'x': timestamp, 'y': temperature})
         data['humidities'].append({'x': timestamp, 'y': humidity})
 
