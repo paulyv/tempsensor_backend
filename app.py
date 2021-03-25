@@ -20,18 +20,18 @@ def worker(file_in_use):
     data['temperatures'] = []
     data['humidities'] = []
     while True:
-        print("data length: " + len(data))
+        #if len(data['temperatures']) > 500, data.pop(0)
         humidity, temperature = sensor()
-        if humidity == None or humidity == 'null' or temperature == None or temperature == 'null':
+        if humidity == None or or temperature == None:
                 time.sleep(0.5)
                 humidity, temperature = sensor()
 
         timestamp = datetime.datetime.now().isoformat()
 
-        if temperature == 'null' or humidity == 'null' or temperature == None:
+        if temperature == None or humidity == None:
             continue
 
-        print("hum: " + str(humidity) + " temp: " + str(temperature))
+        print("current hum: " + str(humidity) + "current temp: " + str(temperature))
 
         data['temperatures'].append({'x': timestamp, 'y': temperature})
         data['humidities'].append({'x': timestamp, 'y': humidity})
@@ -49,8 +49,8 @@ def worker(file_in_use):
         time.sleep(120)
 
 def sensor():
-        humidity = 0
-        temperature = 0
+        humidity = None
+        temperature = None
         try:
                 humidity = dhtSensor.humidity
                 temperature = dhtSensor.temperature
@@ -67,7 +67,7 @@ def mainpage():
 @cross_origin()
 def data():
         humidity, temperature = sensor()
-        if humidity == 0 or temperature == 0:
+        if humidity == None or temperature == None:
                 time.sleep(0.5)
                 humidity, temperature = sensor()
 
