@@ -22,7 +22,7 @@ def worker(file_in_use):
     while True:
         #if len(data['temperatures']) > 500, data.pop(0)
         humidity, temperature = sensor()
-        if humidity == None or or temperature == None:
+        if humidity == None or temperature == None:
                 time.sleep(0.5)
                 humidity, temperature = sensor()
 
